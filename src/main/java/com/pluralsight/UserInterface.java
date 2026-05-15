@@ -1,6 +1,9 @@
 package com.pluralsight;
 
+import com.pluralsight.sales.Contract;
+import com.pluralsight.sales.ContractFileManager;
 import com.pluralsight.sales.Customer;
+import com.pluralsight.sales.SalesContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,21 +49,21 @@ public class UserInterface {
                     dealership.addVehicle(makeVehicle(scanner));
 
                     //updates file
-                    DealershipFileManager file = new DealershipFileManager();
-                    file.saveDealership(dealership);
+                    update();
                 }
                 case 9 -> {
                     dealership.removeVehicle(scanner);
 
                     //updates file
-                    DealershipFileManager file = new DealershipFileManager();
-                    file.saveDealership(dealership);
+                    update();
                 }
                 case 10 -> {
-                    processBuyingCar(scanner);
+                    Contract b = processBuyingCar(scanner);
 
-                    DealershipFileManager file = new DealershipFileManager();
-                    file.saveDealership(dealership);
+                    ContractFileManager file = new ContractFileManager();
+                    file.saveSale(b);
+
+                    update();
                 }
                 case 99 -> {
                     System.out.println("Thank you! Have a nice day.");
@@ -169,13 +172,12 @@ public class UserInterface {
 
     public void processGetAllVehicles(){
         displayVehicles(dealership.getAllVehicles());
-
     }
 
     public Vehicle getVehicleByVin(Scanner scanner) {
         Vehicle v = null;
         while (true) {
-            System.out.println("Vin or X to return: ");
+            System.out.print("Vin or X to return: ");
             String vin = scanner.nextLine();
             if (vin.equalsIgnoreCase("x")) {
                 break;
@@ -195,12 +197,13 @@ public class UserInterface {
         return v;
     }
 
-    public void processBuyingCar(Scanner scanner){
+    public Contract processBuyingCar(Scanner scanner){
+        Contract a = null;
         while(true) {
             Customer c = gatherCustomerInfo(scanner);
             Vehicle v = getVehicleByVin(scanner);
             if (v == null){
-                return;
+                break;
             } else {
                 System.out.print("Would you like to lease or purchase the " + v.getMake() + " " + v.getModel() + ": ");
 
@@ -212,15 +215,15 @@ public class UserInterface {
                     String wantsFinance = scanner.nextLine();
                     boolean isFinancing = wantsFinance.equalsIgnoreCase("Y");
 
-                    dealership.buyCar(false, isFinancing, v, c);
+                    a = dealership.buyCar(false, isFinancing, v, c);
 
                 } else {
-                    dealership.buyCar(true, false, v, c);
+                    a = dealership.buyCar(true, false, v, c);
                 }
                 dealership.getInventory().remove(v);
             }
-            return;
         }
+        return a;
     }
 
     public Customer gatherCustomerInfo(Scanner scanner) {
@@ -228,7 +231,7 @@ public class UserInterface {
         System.out.print("Full Name: ");
         String name = scanner.nextLine();
 
-        System.out.println("Email: ");
+        System.out.print("Email: ");
         String email = scanner.nextLine();
 
         return new Customer(email, name);
@@ -258,5 +261,10 @@ public class UserInterface {
         }
 
         return parts;
+    }
+
+    private void update(){
+        DealershipFileManager file = new DealershipFileManager();
+        file.saveDealership(dealership);
     }
 }

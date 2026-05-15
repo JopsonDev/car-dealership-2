@@ -127,12 +127,13 @@ public class Dealership {
         }
     }
 
-    public void buyCar(boolean isLeased, boolean isFinanced, Vehicle v, Customer customer){
+    public Contract buyCar(boolean isLeased, boolean isFinanced, Vehicle v, Customer customer){
         if (isLeased){
             LeaseContract contract = new LeaseContract(LocalDate.now().toString(), customer.getName(), customer.getEmail(), v);
             contract.getMonthlyPayment();
             contract.getTotalPrice();
             System.out.println(contract);
+            return contract;
 
         } else {
             SalesContract contract = new SalesContract(LocalDate.now().toString(), customer.getName(), customer.getEmail(), v);
@@ -140,6 +141,7 @@ public class Dealership {
             contract.getMonthlyPayment();
             contract.getTotalPrice();
             System.out.println(contract);
+            return contract;
         }
     }
 
