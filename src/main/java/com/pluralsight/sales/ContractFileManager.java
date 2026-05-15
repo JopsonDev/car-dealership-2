@@ -19,7 +19,9 @@ public class ContractFileManager {
                 input = "SALE ";
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-            writer.write(input + contract);
+            Vehicle v = contract.getVehicleSold();
+            writer.write(input + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "\n" +
+                    contract.getVehicleSold() + contract + "\n");
             writer.close();
         } catch (Exception e) {
             System.out.println("Failed to make new dealership file");

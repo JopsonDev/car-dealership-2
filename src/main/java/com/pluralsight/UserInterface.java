@@ -33,6 +33,7 @@ public class UserInterface {
             System.out.println("7 - List ALL vehicles");
             System.out.println("8 - Add a vehicle");
             System.out.println("9 - Remove a vehicle");
+            System.out.println("10 - Purchase a Vehicle");
             System.out.println("99 - Quit");
             int input = scanner.nextInt();
             scanner.nextLine();
@@ -47,13 +48,11 @@ public class UserInterface {
                 case 7 -> processGetAllVehicles();
                 case 8 -> {
                     dealership.addVehicle(makeVehicle(scanner));
-
                     //updates file
                     update();
                 }
                 case 9 -> {
                     dealership.removeVehicle(scanner);
-
                     //updates file
                     update();
                 }
