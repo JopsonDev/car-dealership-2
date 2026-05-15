@@ -101,6 +101,7 @@ public class Dealership {
         inventory.add(vehicle);
     }
 
+    //finds and returns a vehicle with given Vin
     public Vehicle getVehiclesByVin(int vin) {
         Vehicle x = null;
         for (Vehicle v: inventory){
@@ -127,7 +128,9 @@ public class Dealership {
         }
     }
 
+    //runs all the calculation methods in contracts and returns the updated contract
     public Contract buyCar(boolean isLeased, boolean isFinanced, Vehicle v, Customer customer){
+
         if (isLeased){
             LeaseContract contract = new LeaseContract(LocalDate.now().toString(), customer.getName(), customer.getEmail(), v);
             contract.getMonthlyPayment();

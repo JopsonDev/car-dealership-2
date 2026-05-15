@@ -174,6 +174,7 @@ public class UserInterface {
         displayVehicles(dealership.getAllVehicles());
     }
 
+    //userinterface method for gathering vin and displaying responses
     public Vehicle getVehicleByVin(Scanner scanner) {
         Vehicle v = null;
         while (true) {
@@ -197,6 +198,7 @@ public class UserInterface {
         return v;
     }
 
+    //goes through the whole buying process and gives prompts for user to answer
     public Contract processBuyingCar(Scanner scanner){
         Contract a = null;
         while(true) {
@@ -227,6 +229,7 @@ public class UserInterface {
         return a;
     }
 
+    //gathers user information and returns customer
     public Customer gatherCustomerInfo(Scanner scanner) {
         System.out.println("Please provide the following information");
         System.out.print("Full Name: ");
@@ -264,6 +267,7 @@ public class UserInterface {
         return parts;
     }
 
+    //updates inventory file
     private void update(){
         DealershipFileManager file = new DealershipFileManager();
         file.saveDealership(dealership);
