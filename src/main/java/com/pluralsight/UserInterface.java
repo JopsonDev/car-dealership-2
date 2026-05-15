@@ -221,6 +221,7 @@ public class UserInterface {
                     a = dealership.buyCar(true, false, v, c);
                 }
                 dealership.getInventory().remove(v);
+                break;
             }
         }
         return a;
