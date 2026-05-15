@@ -98,6 +98,17 @@ public class Dealership {
         inventory.add(vehicle);
     }
 
+    public Vehicle getVehiclesByVin(int vin) {
+        Vehicle x = null;
+        for (Vehicle v: inventory){
+            if (v.getVin() == vin){
+                x = v;
+                break;
+            }
+        }
+        return x;
+    }
+
     //removes a vehicle by checking vin
     public void removeVehicle(Scanner scanner){
         System.out.println("Vin: ");
@@ -114,7 +125,6 @@ public class Dealership {
     }
 
     public void buyCar(boolean isFinanced, Vehicle v){
-
         if (isFinanced){
             LeaseContract contract = new LeaseContract("10", "name", "email" , v);
             contract.getMonthlyPayment();

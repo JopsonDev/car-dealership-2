@@ -54,8 +54,7 @@ public class UserInterface {
                     file.saveDealership(dealership);
                 }
                 case 10 -> {
-                    Vehicle v = makeVehicle(scanner);
-                    dealership.buyCar(false, v);
+                    processBuyingCar(scanner);
                 }
                 case 99 -> {
                     System.out.println("Thank you! Have a nice day.");
@@ -165,6 +164,32 @@ public class UserInterface {
     public void processGetAllVehicles(){
         displayVehicles(dealership.getAllVehicles());
 
+    }
+
+    public void processBuyingCar(Scanner scanner){
+        System.out.println("Vin: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+
+        Vehicle v = dealership.getVehiclesByVin(vin);
+        if (v != null) {
+            System.out.println(v);
+        } else {
+            System.out.println("No Matching vehicles");
+        }
+
+        System.out.print("Would you like to lease or purchase the " + v.getMake() + " " + v.getModel() + ": ");
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("purchase")){
+            System.out.print("Are we finacning today? (Y/N): ");
+            String wantsFinance = scanner.nextLine();
+
+            boolean isFinancing = wantsFinance.equalsIgnoreCase("Y");
+
+            dealership.buyCar(isFinancing, v);
+        } else {
+            dealership.buyCar(true, v);
+        }
     }
 
     //without other methods will simply print the list of current vehicles
