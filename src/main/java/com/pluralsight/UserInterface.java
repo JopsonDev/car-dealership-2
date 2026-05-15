@@ -53,6 +53,10 @@ public class UserInterface {
                     DealershipFileManager file = new DealershipFileManager();
                     file.saveDealership(dealership);
                 }
+                case 10 -> {
+                    Vehicle v = makeVehicle(scanner);
+                    dealership.buyCar(false, v);
+                }
                 case 99 -> {
                     System.out.println("Thank you! Have a nice day.");
                     return;

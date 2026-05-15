@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import com.pluralsight.sales.LeaseContract;
+import com.pluralsight.sales.SalesContract;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -108,6 +111,23 @@ public class Dealership {
             //goes through the list and compares each v to the vin entered if it matches it removes it
             inventory.removeIf(v -> v.getVin() == vin);
         }
+    }
+
+    public void buyCar(boolean isFinanced, Vehicle v){
+
+        if (isFinanced){
+            LeaseContract contract = new LeaseContract("10", "name", "email" , v);
+            contract.getMonthlyPayment();
+            contract.getTotalPrice();
+            System.out.println(contract);
+        } else {
+            SalesContract contract = new SalesContract("10", "name", "email" , v);
+            contract.getMonthlyPayment();
+            contract.getTotalPrice();
+            System.out.println(contract);
+
+        }
+
     }
 
     //cant take raw code used predicate to see if code is true or false/ cant use boolean because it will return only once and need to test each vehicle
