@@ -1,6 +1,9 @@
 package com.pluralsight;
 
+import com.pluralsight.sales.Customer;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -55,6 +58,9 @@ public class UserInterface {
                 }
                 case 10 -> {
                     processBuyingCar(scanner);
+
+                    DealershipFileManager file = new DealershipFileManager();
+                    file.saveDealership(dealership);
                 }
                 case 99 -> {
                     System.out.println("Thank you! Have a nice day.");
@@ -166,30 +172,66 @@ public class UserInterface {
 
     }
 
+    public Vehicle getVehicleByVin(Scanner scanner) {
+        Vehicle v = null;
+        while (true) {
+            System.out.println("Vin or X to return: ");
+            String vin = scanner.nextLine();
+            if (vin.equalsIgnoreCase("x")) {
+                break;
+            }
+            try {
+                v = dealership.getVehiclesByVin(Integer.parseInt(vin));
+                if (v != null) {
+                    System.out.println(v);
+                    break;
+                } else {
+                    System.out.println("No Matching vehicles");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid entry");
+            }
+        }
+        return v;
+    }
+
     public void processBuyingCar(Scanner scanner){
-        System.out.println("Vin: ");
-        int vin = scanner.nextInt();
-        scanner.nextLine();
+        while(true) {
+            Customer c = gatherCustomerInfo(scanner);
+            Vehicle v = getVehicleByVin(scanner);
+            if (v == null){
+                return;
+            } else {
+                System.out.print("Would you like to lease or purchase the " + v.getMake() + " " + v.getModel() + ": ");
 
-        Vehicle v = dealership.getVehiclesByVin(vin);
-        if (v != null) {
-            System.out.println(v);
-        } else {
-            System.out.println("No Matching vehicles");
+                String input = scanner.nextLine();
+
+                if (input.equalsIgnoreCase("purchase")) {
+
+                    System.out.print("Are we finacning today? (Y/N): ");
+                    String wantsFinance = scanner.nextLine();
+                    boolean isFinancing = wantsFinance.equalsIgnoreCase("Y");
+
+                    dealership.buyCar(false, isFinancing, v, c);
+
+                } else {
+                    dealership.buyCar(true, false, v, c);
+                }
+                dealership.getInventory().remove(v);
+            }
+            return;
         }
+    }
 
-        System.out.print("Would you like to lease or purchase the " + v.getMake() + " " + v.getModel() + ": ");
-        String input = scanner.nextLine();
-        if (input.equalsIgnoreCase("purchase")){
-            System.out.print("Are we finacning today? (Y/N): ");
-            String wantsFinance = scanner.nextLine();
+    public Customer gatherCustomerInfo(Scanner scanner) {
+        System.out.println("Please provide the following information");
+        System.out.print("Full Name: ");
+        String name = scanner.nextLine();
 
-            boolean isFinancing = wantsFinance.equalsIgnoreCase("Y");
+        System.out.println("Email: ");
+        String email = scanner.nextLine();
 
-            dealership.buyCar(isFinancing, v);
-        } else {
-            dealership.buyCar(true, v);
-        }
+        return new Customer(email, name);
     }
 
     //without other methods will simply print the list of current vehicles

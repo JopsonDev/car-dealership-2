@@ -1,8 +1,11 @@
 package com.pluralsight;
 
+import com.pluralsight.sales.Contract;
+import com.pluralsight.sales.Customer;
 import com.pluralsight.sales.LeaseContract;
 import com.pluralsight.sales.SalesContract;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -124,20 +127,20 @@ public class Dealership {
         }
     }
 
-    public void buyCar(boolean isFinanced, Vehicle v){
-        if (isFinanced){
-            LeaseContract contract = new LeaseContract("10", "name", "email" , v);
+    public void buyCar(boolean isLeased, boolean isFinanced, Vehicle v, Customer customer){
+        if (isLeased){
+            LeaseContract contract = new LeaseContract(LocalDate.now().toString(), customer.getName(), customer.getEmail(), v);
             contract.getMonthlyPayment();
             contract.getTotalPrice();
             System.out.println(contract);
+
         } else {
-            SalesContract contract = new SalesContract("10", "name", "email" , v);
+            SalesContract contract = new SalesContract(LocalDate.now().toString(), customer.getName(), customer.getEmail(), v);
+            contract.setFinanceOption(isFinanced);
             contract.getMonthlyPayment();
             contract.getTotalPrice();
             System.out.println(contract);
-
         }
-
     }
 
     //cant take raw code used predicate to see if code is true or false/ cant use boolean because it will return only once and need to test each vehicle

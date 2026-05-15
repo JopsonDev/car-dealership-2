@@ -57,7 +57,6 @@ public class DealershipFileManager {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone() + "\n");
             for (Vehicle v: dealership.getAllVehicles()){
-                System.out.println(v);
                 writer.write(String.valueOf(v));
             }
             writer.close();
