@@ -9,20 +9,17 @@ import java.io.FileWriter;
 public class ContractFileManager {
     private String fileName = "sales.csv";
 
-    public void saveLease(LeaseContract contract) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-            writer.write("LEASE " + contract);
-            writer.close();
-        } catch (Exception e) {
-            System.out.println("Failed to make new dealership file");
-        }
-    }
-
     public void saveSale(Contract contract) {
         try {
+            String input = "";
+            if (contract instanceof LeaseContract) {
+                input = "LEASE ";
+            }
+            else if (contract instanceof SalesContract){
+                input = "SALE ";
+            }
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-            writer.write("LEASE " + contract);
+            writer.write(input + contract);
             writer.close();
         } catch (Exception e) {
             System.out.println("Failed to make new dealership file");
