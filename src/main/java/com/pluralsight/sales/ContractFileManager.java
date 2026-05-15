@@ -22,6 +22,10 @@ public class ContractFileManager {
             Vehicle v = contract.getVehicleSold();
             writer.write(input + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "\n" +
                     contract.getVehicleSold() + contract + "\n");
+            System.out.println("Thank you for your purchase see details below");
+            System.out.println("===============================================");
+            System.out.println(input + contract.getDate() + "|" + contract.getName() + "|" + contract.getEmail() + "\n" +
+                    contract.getVehicleSold() + contract + "\n");
             writer.close();
         } catch (Exception e) {
             System.out.println("Failed to make new dealership file");

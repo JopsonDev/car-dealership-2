@@ -207,13 +207,14 @@ public class UserInterface {
                 break;
             } else {
                 System.out.print("Would you like to lease or purchase the " + v.getMake() + " " + v.getModel() + ": ");
-
                 String input = scanner.nextLine();
+                System.out.println("\n");
 
                 if (input.equalsIgnoreCase("purchase")) {
 
                     System.out.print("Are we finacning today? (Y/N): ");
                     String wantsFinance = scanner.nextLine();
+                    System.out.println("\n");
                     boolean isFinancing = wantsFinance.equalsIgnoreCase("Y");
 
                     a = dealership.buyCar(false, isFinancing, v, c);

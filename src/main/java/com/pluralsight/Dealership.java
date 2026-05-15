@@ -135,7 +135,6 @@ public class Dealership {
             LeaseContract contract = new LeaseContract(LocalDate.now().toString(), customer.getName(), customer.getEmail(), v);
             contract.getMonthlyPayment();
             contract.getTotalPrice();
-            System.out.println(contract);
             return contract;
 
         } else {
@@ -143,7 +142,6 @@ public class Dealership {
             contract.setFinanceOption(isFinanced);
             contract.getMonthlyPayment();
             contract.getTotalPrice();
-            System.out.println(contract);
             return contract;
         }
     }
