@@ -1,8 +1,6 @@
 package com.pluralsight.sales;
 
-import com.pluralsight.Vehicle;
-
-import java.util.Scanner;
+import com.pluralsight.managment.Vehicle;
 
 public class SalesContract extends Contract{
     private double salesTaxAmount;

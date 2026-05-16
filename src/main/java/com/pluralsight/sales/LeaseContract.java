@@ -1,6 +1,6 @@
 package com.pluralsight.sales;
 
-import com.pluralsight.Vehicle;
+import com.pluralsight.managment.Vehicle;
 
 public class LeaseContract extends Contract {
     private double expectedEndingValue;

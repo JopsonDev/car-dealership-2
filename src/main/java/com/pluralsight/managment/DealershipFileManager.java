@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.managment;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

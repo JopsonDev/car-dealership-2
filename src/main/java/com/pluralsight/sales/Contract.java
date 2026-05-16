@@ -1,6 +1,6 @@
 package com.pluralsight.sales;
 
-import com.pluralsight.Vehicle;
+import com.pluralsight.managment.Vehicle;
 
 abstract public class Contract {
     private String date;

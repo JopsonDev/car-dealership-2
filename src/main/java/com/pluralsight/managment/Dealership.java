@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.managment;
 
 import com.pluralsight.sales.Contract;
 import com.pluralsight.sales.Customer;

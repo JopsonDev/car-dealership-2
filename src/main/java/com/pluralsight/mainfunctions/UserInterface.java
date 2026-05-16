@@ -1,12 +1,14 @@
-package com.pluralsight;
+package com.pluralsight.mainfunctions;
 
+import com.pluralsight.managment.AdminUserInterface;
+import com.pluralsight.managment.Dealership;
+import com.pluralsight.managment.DealershipFileManager;
+import com.pluralsight.managment.Vehicle;
 import com.pluralsight.sales.Contract;
 import com.pluralsight.sales.ContractFileManager;
 import com.pluralsight.sales.Customer;
-import com.pluralsight.sales.SalesContract;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -63,6 +65,10 @@ public class UserInterface {
                     file.saveSale(b);
 
                     update();
+                }
+                case 77 -> {
+                    AdminUserInterface admin = new AdminUserInterface();
+                    admin.checkAccess(admin.login(scanner), scanner);
                 }
                 case 99 -> {
                     System.out.println("Thank you! Have a nice day.");

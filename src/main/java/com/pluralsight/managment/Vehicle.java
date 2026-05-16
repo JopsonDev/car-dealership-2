@@ -1,6 +1,4 @@
-package com.pluralsight;
-
-import java.util.Scanner;
+package com.pluralsight.managment;
 
 public class Vehicle {
     private int vin;
