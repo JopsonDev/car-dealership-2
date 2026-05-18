@@ -36,6 +36,7 @@ public class UserInterface {
             System.out.println("8 - Add a vehicle");
             System.out.println("9 - Remove a vehicle");
             System.out.println("10 - Purchase a Vehicle");
+            System.out.println("77 - Admin Interface");
             System.out.println("99 - Quit");
             int input = scanner.nextInt();
             scanner.nextLine();
